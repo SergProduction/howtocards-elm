@@ -1,17 +1,30 @@
 @width: 10px;
 @height: @width + 10px;
 
-#MainContainer {
-  display: grid;
-  min-height: 100vh;
-  max-height: 100vh;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "header"
-    "."
-    "footer";
-  flex-grow: 1; 
+
+#main-template {
+  .main-container {
+    display: grid;
+    min-height: 100vh;
+    max-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "header"
+      "."
+      "footer";
+    flex-grow: 1; 
+  }
+
+  .header {
+    grid-area: header;
+    z-index: 1;
+  }
+
+  .footer {
+    grid-area: footer;
+  }
 }
+
 
 #Header {
   grid-area: header;
