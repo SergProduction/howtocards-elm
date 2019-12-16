@@ -20,14 +20,14 @@ mapMaybeHtml f maybeHtml =
           
 
 mainTemplate : Maybe (Html msg) -> Maybe (Html msg) -> Html msg -> Html msg
-mainTemplate header footer children =
+mainTemplate maybeHeader maybeFooter children =
   div
     [
       (id "main-template"),
       (class "main-container")
     ]
     [
-      mapMaybeHtml (\h -> mainTemplateHeader h) header,
+      mapMaybeHtml (\header -> mainTemplateHeader header) maybeHeader,
       children,
-      mapMaybeHtml (\f -> mainTemplateFooter f) footer
+      mapMaybeHtml (\footer -> mainTemplateFooter footer) maybeFooter
     ]
