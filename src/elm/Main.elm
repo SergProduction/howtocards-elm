@@ -49,6 +49,8 @@ update msg model =
 -- VIEW
 view : Model -> Html Msg
 view model = mainTemplate
-  (div [] [ text "header"])
-  (div [] [ text "footer"])
+  (Just <| div [] [ text "header"])
+  Nothing
   (div [] [ text "content"])
+
+

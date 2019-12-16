@@ -1,18 +1,25 @@
 module Ui.Templates exposing (mainTemplate)
 
-import Html exposing (Html, div, header, footer)
+import Html exposing (Html, div, header, footer, text)
 import Html.Attributes exposing (id, class)
 
 
 
-mainTemplateHeader : Html a -> Html a
+mainTemplateHeader : Html msg -> Html msg
 mainTemplateHeader children = header [ class "header" ] [ children ]
 
-mainTemplateFooter : Html a -> Html a
+mainTemplateFooter : Html msg -> Html msg
 mainTemplateFooter children =  footer [ class "footer" ] [ children ]
 
 
-mainTemplate : Html a -> Html a -> Html a -> Html a
+mapMaybeHtml : (Html msg -> Html msg) -> Maybe (Html msg) -> Html msg
+mapMaybeHtml f maybeHtml =
+  case maybeHtml of
+      Just html -> f html
+      Nothing -> text ""
+          
+
+mainTemplate : Maybe (Html msg) -> Maybe (Html msg) -> Html msg -> Html msg
 mainTemplate header footer children =
   div
     [
@@ -20,7 +27,7 @@ mainTemplate header footer children =
       (class "main-container")
     ]
     [
-      (mainTemplateHeader header),
+      mapMaybeHtml (\h -> mainTemplateHeader h) header,
       children,
-      (mainTemplateFooter footer)
+      mapMaybeHtml (\f -> mainTemplateFooter f) footer
     ]
